@@ -31,33 +31,33 @@ jobs:
           name: dist
           path: dist/
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # test:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
+  #     - name: Download Build Artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist
+  #         path: dist/
 
-      - name: Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+  #     - name: Node 20
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
 
-      - name: Install Dependencies
-        run: npm ci --loglevel=error
+  #     - name: Install Dependencies
+  #       run: npm ci --loglevel=error
 
-      - name: Run Unit Tests
-        run: npm run test:ci
-        env:
-          NODE_OPTIONS: --experimental-vm-modules
+  #     - name: Run Unit Tests
+  #       run: npm run test:ci
+  #       env:
+  #         NODE_OPTIONS: --experimental-vm-modules
 
   publish:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read

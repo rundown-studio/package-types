@@ -2,7 +2,8 @@
   "name": "@rundown-studio/types",
   "version": "0.1.0",
   "description": "Shared types for the Rundown Studio project",
-  "main": "dist/index.js",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
@@ -15,7 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/rundown-studio/package-types.git"
   },
-  "exports": "./dist/index.js",
   "files": [
     "dist",
     "README.md"
