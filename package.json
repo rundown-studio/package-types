@@ -1,6 +1,6 @@
 {
   "name": "@rundown-studio/types",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared types for the Rundown Studio project",
   "main": "dist/index.ts",
   "types": "dist/index.d.ts",
