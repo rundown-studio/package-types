@@ -2,24 +2,24 @@
   "name": "@rundown-studio/types",
   "version": "0.2.0",
   "description": "Shared types for the Rundown Studio project",
-  "main": "dist/index.ts",
-  "types": "dist/index.d.ts",
-  "type": "module",
-  "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:ci": "jest --ci",
-    "build": "tsc"
-  },
   "license": "ISC",
   "author": "Lukas Hermann <hey@lukashermann.dev>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rundown-studio/package-types.git"
   },
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist",
     "README.md"
   ],
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:ci": "jest --ci",
+    "build": "tsc"
+  },
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "@stylistic/eslint-plugin": "^2.2.1",
