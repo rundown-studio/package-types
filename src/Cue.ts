@@ -23,7 +23,7 @@ export type RundownCueSnapshot = {
   startMode: CueStartMode
   duration: number
   backgroundColor: string | null
-  editing: CueEditing // previously 'locked: boolean'
+  locked: boolean // TODO: refactor to `editing: CueEditing`
 }
 
 export type RundownCue = RundownCueSnapshot & {
