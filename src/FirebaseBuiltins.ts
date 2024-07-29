@@ -4,7 +4,15 @@
 
 export type DocumentSnapshotId = string
 
-export type DocumentSnapshot = {
+export interface FirestoreTimestamp {
+  nanoseconds: number
+  seconds: number
+  toDate: () => Date
+  toMillis: () => number
+  toString: () => string
+}
+
+export interface DocumentSnapshot {
   id: DocumentSnapshotId
   [key: string]: any
   createTime?: FirestoreTimestamp | undefined
@@ -13,21 +21,13 @@ export type DocumentSnapshot = {
   ref?: any
 }
 
-export type FirestoreTimestamp = {
-  nanoseconds: number
-  seconds: number
-  toDate: () => Date
-  toMillis: () => number
-  toString: () => string
-}
-
 //
 // Auth
 //
 
 export type UserRecordId = string
 
-export type UserRecord = {
+export interface UserRecord {
   uid: UserRecordId
   email?: string | null
   emailVerified?: boolean

@@ -6,12 +6,12 @@ export enum UserRole {
   TEAM_MEMBER = 'team_member',
 }
 
-export type TeamMember = {
+export interface TeamMember {
   role: UserRole
   createdAt: Date
 }
 
-export type TeamSnapshot = {
+export interface TeamSnapshot {
   name: string
   members: {
     [uid: string]: TeamMember
@@ -22,7 +22,7 @@ export type TeamSnapshot = {
   apiToken?: string | null
 }
 
-export type Team = TeamSnapshot & {
+export interface Team extends TeamSnapshot {
   id: DocumentSnapshotId
   createdAt: Date
   updatedAt: Date

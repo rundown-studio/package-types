@@ -15,13 +15,18 @@ export enum RundownStatus {
   REJECTED = 'rejected',
 }
 
-export type RundownSnapshot = {
+export interface RundownCueOrderItem {
+  id: DocumentSnapshotId
+  children?: RundownCueOrderItem[]
+}
+
+export interface RundownSnapshot {
   name: string
   teamId: DocumentSnapshotId | null
   eventId: DocumentSnapshotId | null
   runnerId: DocumentSnapshotId | null
   columns: DocumentSnapshotId[] // order of columns
-  cues: DocumentSnapshotId[] // order of cues
+  cues: RundownCueOrderItem[] // order of cues
   startTime: FirestoreTimestamp | Date
   endTime: FirestoreTimestamp | Date
   salt: string
@@ -30,7 +35,7 @@ export type RundownSnapshot = {
   deletedAt: FirestoreTimestamp | Date | null
 }
 
-export type Rundown = RundownSnapshot & {
+export interface Rundown extends RundownSnapshot {
   id: DocumentSnapshotId
   createdAt: Date
   updatedAt: Date

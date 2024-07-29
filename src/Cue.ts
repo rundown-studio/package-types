@@ -10,12 +10,13 @@ export enum CueStartMode {
   LOCKED = 'locked',
 }
 
-export enum CueEditing {
-  ALL = 'all',
-  NONE = 'none',
-}
+// TODO: use instead of 'locked: boolean'
+// export enum CueEditing {
+//   ALL = 'all',
+//   NONE = 'none',
+// }
 
-export type RundownCueSnapshot = {
+export interface RundownCueSnapshot {
   type: CueType
   title: string
   subtitle: string
@@ -26,7 +27,7 @@ export type RundownCueSnapshot = {
   locked: boolean // TODO: refactor to `editing: CueEditing`
 }
 
-export type RundownCue = RundownCueSnapshot & {
+export interface RundownCue extends RundownCueSnapshot {
   id: DocumentSnapshotId
   createdAt: Date
   updatedAt: Date

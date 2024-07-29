@@ -1,7 +1,7 @@
 import { Rundown } from './Rundown'
 import { RundownCue } from './Cue'
 
-export type ApiV0Rundown = {
+export interface ApiV0Rundown {
   id: Rundown['id']
   name: Rundown['name']
   startTime: Rundown['startTime']
@@ -11,7 +11,7 @@ export type ApiV0Rundown = {
   updatedAt: Rundown['updatedAt']
 }
 
-export type ApiV0Cue = {
+export interface ApiV0Cue {
   id: RundownCue['id']
   type: RundownCue['type']
   title: RundownCue['title']
