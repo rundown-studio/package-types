@@ -3,6 +3,7 @@ import { DocumentSnapshotId } from './FirebaseBuiltins'
 export enum CueType {
   CUE = 'cue',
   HEADING = 'heading',
+  GROUP = 'group',
 }
 
 export enum CueStartMode {

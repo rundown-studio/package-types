@@ -18,8 +18,8 @@ export interface RunnerTimesnap {
  */
 export interface RunnerCue {
   id?: RundownCue['id']
+  startTime: Date | null
   duration: number
-  startTime: Date
 }
 
 export interface RunnerSnapshot {
