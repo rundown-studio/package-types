@@ -16,9 +16,13 @@ export interface RunnerTimesnap {
 /**
  * The runner remembers these basic information about all the cues to identify changes and delays.
  */
-export interface RunnerCue {
-  id?: RundownCue['id']
+export interface RunnerOriginalCue {
   startTime: Date | null
+  duration: number
+}
+
+export interface RunnerElapsedCue {
+  startTime: Date
   duration: number
 }
 
@@ -26,8 +30,8 @@ export interface RunnerSnapshot {
   rundownId: Rundown['id']
   timesnap: RunnerTimesnap
   nextCueId: RundownCue['id'] | null
-  originalCues: Record<RundownCue['id'], RunnerCue>
-  elapsedCues: Record<RundownCue['id'], RunnerCue>
+  originalCues: Record<RundownCue['id'], RunnerOriginalCue>
+  elapsedCues: Record<RundownCue['id'], RunnerElapsedCue>
   log: string[]
 }
 
