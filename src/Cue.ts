@@ -8,7 +8,7 @@ export enum CueType {
 
 export enum CueStartMode {
   FLEXIBLE = 'flexible',
-  LOCKED = 'locked',
+  FIXED = 'fixed',
 }
 
 // TODO: use instead of 'locked: boolean'
@@ -21,11 +21,12 @@ export interface RundownCueSnapshot {
   type: CueType
   title: string
   subtitle: string
-  startTime: Date | null
+  startTime: Date | null // Essentially ignored for first cue
   startMode: CueStartMode
   duration: number
   backgroundColor: string | null
   locked: boolean // TODO: refactor to `editing: CueEditing`
+  // editing: CueEditing
 }
 
 export interface RundownCue extends RundownCueSnapshot {
