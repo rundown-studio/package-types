@@ -1,4 +1,4 @@
-import { RundownCue } from './Cue'
+import { RundownCue, CueStartMode } from './Cue'
 import { Rundown } from './Rundown'
 import { DocumentSnapshotId } from './FirebaseBuiltins'
 
@@ -18,6 +18,7 @@ export interface RunnerTimesnap {
  */
 export interface RunnerOriginalCue {
   startTime: Date | null
+  startMode: CueStartMode
   duration: number
 }
 
