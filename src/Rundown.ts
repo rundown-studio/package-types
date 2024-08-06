@@ -2,6 +2,7 @@ import { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
 import { RundownCue } from './Cue'
 import { randomBytes } from 'crypto'
 import { parse } from 'date-fns'
+import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -36,6 +37,9 @@ export interface RundownSnapshot {
   salt: string
   status: RundownStatus
   timezone?: string
+  settings: {
+    cueBackgroundColours: string[]
+  }
   deletedAt: FirestoreTimestamp | Date | null
 }
 
@@ -58,5 +62,8 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   salt: randomBytes(16).toString('hex'),
   status: RundownStatus.DRAFT,
   timezone: undefined,
+  settings: {
+    cueBackgroundColours: CUE_BACKGROUND_COLORS,
+  },
   deletedAt: null,
 })

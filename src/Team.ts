@@ -1,4 +1,4 @@
-import { DocumentSnapshotId } from './FirebaseBuiltins'
+import { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export enum UserRole {
   TEAM_ADMIN = 'team_admin',
@@ -14,7 +14,7 @@ export interface TeamMember {
 export interface TeamSnapshot {
   name: string
   members: {
-    [uid: string]: TeamMember
+    [uid: UserRecordId]: TeamMember
   }
   pending: {
     [email: string]: TeamMember
@@ -27,3 +27,15 @@ export interface Team extends TeamSnapshot {
   createdAt: Date
   updatedAt: Date
 }
+
+export const getTeamDefaults = (): TeamSnapshot => ({
+  name: '',
+  members: {},
+  pending: {},
+  apiToken: null,
+})
+
+export const getMemberDefaults = (): TeamMember => ({
+  role: UserRole.TEAM_MEMBER,
+  createdAt: new Date(),
+})
