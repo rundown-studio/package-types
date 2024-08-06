@@ -1,5 +1,7 @@
 import { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
 import { RundownCue } from './Cue'
+import { randomBytes } from 'crypto'
+import { parse } from 'date-fns'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -42,3 +44,19 @@ export interface Rundown extends RundownSnapshot {
   createdAt: Date
   updatedAt: Date
 }
+
+export const getRundownDefaults = (): RundownSnapshot => ({
+  name: '',
+  teamId: null,
+  eventId: null,
+  runnerId: null,
+  columns: [],
+  cues: [],
+  startTime: parse('09:00:00', 'HH:mm:ss', new Date()),
+  endTime: null,
+  startCueId: null,
+  salt: randomBytes(16).toString('hex'),
+  status: RundownStatus.DRAFT,
+  timezone: undefined,
+  deletedAt: null,
+})

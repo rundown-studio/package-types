@@ -41,3 +41,21 @@ export interface Runner extends RunnerSnapshot {
   createdAt?: Date
   updatedAt?: Date
 }
+
+export const getRunnerDefaults = (): Runner => {
+  const now = Date.now()
+  return {
+    rundownId: '',
+    timesnap: {
+      cueId: null,
+      running: false,
+      kickoff: now,
+      lastStop: now,
+      deadline: now + (10 * 60000),
+    },
+    nextCueId: null,
+    originalCues: {},
+    elapsedCues: {},
+    log: [],
+  }
+}

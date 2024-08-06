@@ -34,3 +34,14 @@ export interface RundownCue extends RundownCueSnapshot {
   createdAt: Date
   updatedAt: Date
 }
+
+export const getCueDefaults = (): RundownCueSnapshot => ({
+  type: CueType.CUE,
+  title: '',
+  subtitle: '',
+  startTime: null,
+  startMode: CueStartMode.FLEXIBLE,
+  duration: 600000, // 10 min
+  backgroundColor: '',
+  locked: false,
+})
