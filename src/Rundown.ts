@@ -1,4 +1,5 @@
 import { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
+import { RundownCue } from './Cue'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -28,7 +29,8 @@ export interface RundownSnapshot {
   columns: DocumentSnapshotId[] // order of columns
   cues: RundownCueOrderItem[] // order of cues
   startTime: FirestoreTimestamp | Date
-  endTime: FirestoreTimestamp | Date
+  endTime: FirestoreTimestamp | Date | null // OBSOLETE
+  startCueId: RundownCue['id'] | null
   salt: string
   status: RundownStatus
   timezone?: string
