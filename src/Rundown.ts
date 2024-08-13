@@ -38,7 +38,8 @@ export interface RundownSnapshot {
   status: RundownStatus
   timezone?: string
   settings: {
-    cueBackgroundColours: string[]
+    outputConfig?: string
+    cueBackgroundColours?: string[]
   }
   deletedAt: FirestoreTimestamp | Date | null
 }
@@ -63,6 +64,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   status: RundownStatus.DRAFT,
   timezone: undefined,
   settings: {
+    outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
   },
   deletedAt: null,

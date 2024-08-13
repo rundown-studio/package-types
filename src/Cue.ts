@@ -21,8 +21,8 @@ export interface RundownCueSnapshot {
   type: CueType
   title: string
   subtitle: string
-  startTime: Date | null // Essentially ignored for first cue
-  startMode: CueStartMode
+  startTime?: Date | null // Essentially ignored for first cue, taken from rundown.startTime
+  startMode?: CueStartMode // Essentially ignored for first cue
   duration: number
   backgroundColor: string | null
   locked: boolean // TODO: refactor to `editing: CueEditing`

@@ -17,8 +17,8 @@ export interface RunnerTimesnap {
  * The runner remembers these basic information about all the cues to identify changes and delays.
  */
 export interface RunnerOriginalCue {
-  startTime: Date | null
-  startMode: CueStartMode
+  startTime?: Date | null
+  startMode?: CueStartMode
   duration: number
 }
 
