@@ -1,6 +1,6 @@
 import { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
 import { RundownCue } from './Cue'
-import { randomBytes } from 'crypto'
+import crypto from 'crypto'
 import { parse } from 'date-fns'
 import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
 
@@ -60,7 +60,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   startTime: parse('09:00:00', 'HH:mm:ss', new Date()),
   endTime: null,
   startCueId: null,
-  salt: randomBytes(16).toString('hex'),
+  salt: crypto.randomBytes(16).toString('hex'),
   status: RundownStatus.DRAFT,
   timezone: undefined,
   settings: {
