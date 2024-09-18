@@ -41,7 +41,7 @@ export const getCueDefaults = (): RundownCueSnapshot => ({
   subtitle: '',
   startTime: null,
   startMode: CueStartMode.FLEXIBLE,
-  duration: 600000, // 10 min
+  duration: 0, // 0 seconds
   backgroundColor: '',
   locked: false,
 })
