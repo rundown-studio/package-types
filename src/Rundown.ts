@@ -36,7 +36,7 @@ export interface RundownSnapshot {
   startCueId: RundownCue['id'] | null
   salt: string
   status: RundownStatus
-  timezone?: string
+  timezone: string | null
   settings: {
     outputConfig?: string
     cueBackgroundColours?: string[]
@@ -62,7 +62,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   startCueId: null,
   salt: crypto.randomBytes(16).toString('hex'),
   status: RundownStatus.DRAFT,
-  timezone: undefined,
+  timezone: null,
   settings: {
     outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
