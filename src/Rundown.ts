@@ -37,9 +37,11 @@ export interface RundownSnapshot {
   salt: string
   status: RundownStatus
   timezone: string | null
+  logo: string | null
   settings: {
     outputConfig?: string
     cueBackgroundColours?: string[]
+    currentCueHighlightColor?: string
   }
   deletedAt: FirestoreTimestamp | Date | null
 }
@@ -63,9 +65,11 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   salt: crypto.randomBytes(16).toString('hex'),
   status: RundownStatus.DRAFT,
   timezone: null,
+  logo: '',
   settings: {
     outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
+    currentCueHighlightColor: ''
   },
   deletedAt: null,
 })
