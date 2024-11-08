@@ -69,7 +69,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   settings: {
     outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
-    currentCueHighlightColor: ''
+    currentCueHighlightColor: '',
   },
   deletedAt: null,
 })
