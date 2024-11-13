@@ -42,7 +42,7 @@ export interface RundownSnapshot {
     outputConfig?: string
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
-    timeDisplayFormat?: string
+    todDisplayFormat?: string
   }
   deletedAt: FirestoreTimestamp | Date | null
 }
@@ -71,7 +71,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
     outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
     currentCueHighlightColor: '',
-    timeDisplayFormat: '',
+    todDisplayFormat: '',
   },
   deletedAt: null,
 })
