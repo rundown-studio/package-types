@@ -42,7 +42,7 @@ export interface RundownSnapshot {
     outputConfig?: string
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
-    todDisplayFormat?: string | null
+    todDisplayFormat?: '12hNoAmPm' | '12h' | '24h'
   }
   deletedAt: FirestoreTimestamp | Date | null
 }
