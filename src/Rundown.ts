@@ -42,7 +42,7 @@ export interface RundownSnapshot {
     outputConfig?: string
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
-    todDisplayFormat?: '12hNoAmPm' | '12h' | '24h'
+    todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
   }
   deletedAt: FirestoreTimestamp | Date | null
 }
@@ -53,6 +53,9 @@ export interface Rundown extends RundownSnapshot {
   updatedAt: Date
 }
 
+/**
+ * Note: Firestore doesn't support the value `undefined`, so we need to omit these keys instead.
+ */
 export const getRundownDefaults = (): RundownSnapshot => ({
   name: '',
   teamId: null,
@@ -71,7 +74,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
     outputConfig: '',
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
     currentCueHighlightColor: '',
-    todDisplayFormat: '',
+    todDisplayFormat: null,
   },
   deletedAt: null,
 })
