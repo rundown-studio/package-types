@@ -11,12 +11,6 @@ export enum CueStartMode {
   FIXED = 'fixed',
 }
 
-// TODO: use instead of 'locked: boolean'
-// export enum CueEditing {
-//   ALL = 'all',
-//   NONE = 'none',
-// }
-
 export interface RundownCueSnapshot {
   type: CueType
   title: string
@@ -26,8 +20,8 @@ export interface RundownCueSnapshot {
   startDatePlus?: number
   duration: number
   backgroundColor: string | null
-  locked: boolean // TODO: refactor to `editing: CueEditing`
-  // editing: CueEditing
+  locked: boolean // TODO: rename to editLocked
+  scheduled: boolean // If scheduled to auto-start
 }
 
 export interface RundownCue extends RundownCueSnapshot {
@@ -46,4 +40,5 @@ export const getCueDefaults = (): RundownCueSnapshot => ({
   duration: 0, // 0 seconds
   backgroundColor: '',
   locked: false,
+  scheduled: false,
 })
