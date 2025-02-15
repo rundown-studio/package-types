@@ -45,6 +45,7 @@ export interface RundownSnapshot {
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
   }
   deletedAt: FirestoreTimestamp | Date | null
+  archivedAt: FirestoreTimestamp | Date | null
 }
 
 export interface Rundown extends RundownSnapshot {
@@ -77,4 +78,5 @@ export const getRundownDefaults = (): RundownSnapshot => ({
     todDisplayFormat: null,
   },
   deletedAt: null,
+  archivedAt: null,
 })
