@@ -42,6 +42,12 @@ export interface Runner extends RunnerSnapshot {
   updatedAt?: Date
 }
 
+export enum RunnerState {
+  PRESHOW = 'PRESHOW',
+  ONAIR = 'ONAIR',
+  ENDED = 'ENDED',
+}
+
 export const getRunnerDefaults = (): Runner => {
   const now = Date.now()
   return {
