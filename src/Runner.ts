@@ -53,7 +53,7 @@ export enum RunnerState {
   ENDED = 'ENDED',
 }
 
-export const getRunnerDefaults = (): Runner => {
+export const getRunnerDefaults = (): RunnerSnapshot => {
   const now = Date.now()
   return {
     rundownId: '',
