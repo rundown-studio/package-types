@@ -37,11 +37,16 @@ export interface RunnerSnapshot {
 }
 
 export interface Runner extends RunnerSnapshot {
-  id?: DocumentSnapshotId
-  createdAt?: Date
-  updatedAt?: Date
+  id: DocumentSnapshotId
+  createdAt: Date
+  updatedAt: Date
 }
 
+/**
+ * PRESHOW - This is the planing phase, the show has not started, the runner is 'null'
+ * ONAIR   - The show has started and is currently running
+ * ENDED   - The show is over, but we keep the elapsed timing on display for post-show analysis
+ */
 export enum RunnerState {
   PRESHOW = 'PRESHOW',
   ONAIR = 'ONAIR',
