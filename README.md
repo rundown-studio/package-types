@@ -10,4 +10,4 @@ npm i @rundown-studio/types
 
 ## Pinned Dependencies
 
-- no issues
+- nanoid@3: Higher versions no longer work with `require` imports
