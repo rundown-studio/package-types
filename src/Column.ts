@@ -1,11 +1,16 @@
-import { DocumentSnapshotId } from './FirebaseBuiltins'
+import { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export type ColumnType = 'richtext' | 'select' | 'images' | 'attachments'
 
 export interface RundownColumnSnapshot {
-  type: ColumnType
   name: string
+  type: ColumnType
+
+  // The width of a column in pixel
   width?: number
+
+  // Defines if the column is private for a single user (uid) or public (null)
+  privateUid?: UserRecordId | null
 }
 
 export interface RundownColumn extends RundownColumnSnapshot {
@@ -15,6 +20,7 @@ export interface RundownColumn extends RundownColumnSnapshot {
 }
 
 export const getColumnDefaults = (): RundownColumnSnapshot => ({
-  type: 'richtext',
   name: '',
+  type: 'richtext',
+  privateUid: null,
 })
