@@ -1,5 +1,5 @@
-import { Rundown } from './Rundown'
-import { RundownCue } from './Cue'
+import type { Rundown } from './Rundown'
+import type { RundownCue } from './Cue'
 
 export interface ApiV0Rundown {
   id: Rundown['id']

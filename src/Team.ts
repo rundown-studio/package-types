@@ -1,4 +1,4 @@
-import { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
+import type { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export enum UserRole {
   TEAM_ADMIN = 'team_admin',

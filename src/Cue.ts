@@ -1,4 +1,4 @@
-import { DocumentSnapshotId } from './FirebaseBuiltins'
+import type { DocumentSnapshotId } from './FirebaseBuiltins'
 
 export enum CueType {
   CUE = 'cue',

@@ -1,4 +1,4 @@
-import { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
+import type { DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export type ColumnType = 'richtext' | 'select' | 'images' | 'attachments'
 

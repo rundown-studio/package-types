@@ -1,5 +1,5 @@
-import { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
-import { RundownCue } from './Cue'
+import type { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
+import type { RundownCue } from './Cue'
 import { parse } from 'date-fns'
 import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
 import { nanoid } from 'nanoid'

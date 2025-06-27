@@ -1,6 +1,6 @@
-import { RundownCue, CueStartMode } from './Cue'
-import { Rundown } from './Rundown'
-import { DocumentSnapshotId } from './FirebaseBuiltins'
+import type { RundownCue, CueStartMode } from './Cue'
+import type { Rundown } from './Rundown'
+import type { DocumentSnapshotId } from './FirebaseBuiltins'
 
 /**
  * The timesnap contains all the information to derive the current countdown status.
