@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci --loglevel=error
 
-      - name: Compile Typescript
+      - name: Build
         run: npm run build
 
       - name: Upload Build Artifacts
@@ -86,4 +86,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
