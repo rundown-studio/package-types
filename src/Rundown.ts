@@ -2,7 +2,7 @@ import type { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
 import type { RundownCue } from './Cue'
 import { parse } from 'date-fns'
 import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
-import { nanoid } from 'nanoid'
+import { generateSalt } from './utils/generateSalt'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -67,7 +67,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   startTime: parse('09:00:00', 'HH:mm:ss', new Date()),
   endTime: null,
   startCueId: null,
-  salt: nanoid(16),
+  salt: generateSalt(16),
   status: RundownStatus.DRAFT,
   timezone: null,
   logo: '',
