@@ -5,6 +5,7 @@ export type ColumnType = 'richtext' | 'select' | 'images' | 'attachments'
 export interface RundownColumnSnapshot {
   name: string
   type: ColumnType
+  deletedAt: Date | null
 
   // The width of a column in pixel
   width?: number
@@ -23,4 +24,5 @@ export const getColumnDefaults = (): RundownColumnSnapshot => ({
   name: '',
   type: 'richtext',
   privateUid: null,
+  deletedAt: null,
 })
