@@ -11,6 +11,8 @@ export interface RundownColumnSnapshot {
 
   // Defines if the column is private for a single user (uid) or public (null)
   privateUid?: UserRecordId | null
+
+  deletedAt: Date | null
 }
 
 export interface RundownColumn extends RundownColumnSnapshot {
@@ -23,4 +25,5 @@ export const getColumnDefaults = (): RundownColumnSnapshot => ({
   name: '',
   type: 'richtext',
   privateUid: null,
+  deletedAt: null,
 })

@@ -22,6 +22,7 @@ export interface RundownCueSnapshot {
   backgroundColor: string | null
   locked: boolean // TODO: rename to editLocked
   scheduled: boolean // If scheduled to auto-start
+  deletedAt: Date | null
 }
 
 export interface RundownCue extends RundownCueSnapshot {
@@ -41,4 +42,5 @@ export const getCueDefaults = (): RundownCueSnapshot => ({
   backgroundColor: '',
   locked: false,
   scheduled: false,
+  deletedAt: null,
 })
