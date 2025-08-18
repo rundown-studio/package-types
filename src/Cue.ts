@@ -29,7 +29,7 @@ export interface RundownCueSnapshot {
   locked: boolean // LEGACY kept for backward compatibility, moved to settings.preventEdits
   scheduled: boolean // If scheduled to auto-start
   deletedAt: Date | null
-  settings?: RundownCueSettings
+  settings: RundownCueSettings // Optional for backward compatibility, but should always be present after migration
 }
 
 export interface RundownCue extends RundownCueSnapshot {
