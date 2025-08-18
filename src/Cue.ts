@@ -11,6 +11,12 @@ export enum CueStartMode {
   FIXED = 'fixed',
 }
 
+export interface RundownCueSettings {
+  hideOnPdf: boolean
+  hideOnCsv: boolean
+  preventEdits: boolean
+}
+
 export interface RundownCueSnapshot {
   type: CueType
   title: string
@@ -20,9 +26,10 @@ export interface RundownCueSnapshot {
   startDatePlus?: number
   duration: number
   backgroundColor: string | null
-  locked: boolean // TODO: rename to editLocked
+  locked: boolean // LEGACY kept for backward compatibility, moved to settings.preventEdits
   scheduled: boolean // If scheduled to auto-start
   deletedAt: Date | null
+  settings?: RundownCueSettings
 }
 
 export interface RundownCue extends RundownCueSnapshot {
@@ -43,4 +50,9 @@ export const getCueDefaults = (): RundownCueSnapshot => ({
   locked: false,
   scheduled: false,
   deletedAt: null,
+  settings: {
+    hideOnPdf: false,
+    hideOnCsv: false,
+    preventEdits: false,
+  },
 })
