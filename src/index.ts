@@ -12,6 +12,7 @@ export * from './types/Cue'
 export * from './types/Column'
 export * from './types/Cell'
 export * from './types/Runner'
+export * from './types/Mention'
 export * from './types/ApiV0'
 export * from './types/Scheduler'
 

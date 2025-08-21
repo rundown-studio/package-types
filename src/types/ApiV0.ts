@@ -1,5 +1,6 @@
 import type { Rundown } from './Rundown'
 import type { RundownCue } from './Cue'
+import type { Mention } from './Mention'
 
 export interface ApiV0Rundown {
   id: Rundown['id']
@@ -21,4 +22,15 @@ export interface ApiV0Cue {
   locked: RundownCue['locked']
   createdAt: RundownCue['createdAt']
   updatedAt: RundownCue['updatedAt']
+}
+
+/**
+ * External API representation of a Mention
+ * Uses 'key' instead of 'id' and excludes timestamps
+ */
+export interface ApiV0Mention {
+  key: Mention['key']
+  name: Mention['name']
+  color: Mention['color']
+  description: Mention['description']
 }
