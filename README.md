@@ -14,7 +14,7 @@ This package uses a three-tier type system for handling data transformations acr
 
 ### Type Naming Convention
 
-For each entity (e.g., `Rundown`, `Cue`, `Team`), we define three distinct types:
+For each entity (e.g., `Rundown`, `Cue`, `Team`, `Column`, `Cell`, `Runner`, `Mention`), we define three distinct types:
 
 1. **`EntityFirestore`** - Raw data from Firestore snapshots
    - Contains Firestore `Timestamp` objects
@@ -31,10 +31,18 @@ For each entity (e.g., `Rundown`, `Cue`, `Team`), we define three distinct types
 
 ### Converter Functions
 
-Each entity includes type-safe converter functions:
+This package provides both generic and entity-specific converter functions:
 
+#### Generic Converters
+- `fromSnapshot<TFirestore, TEntity>(snapshot, config)` - Generic converter with configuration
+- `fromSerialized<TSerialized, TEntity>(serialized, config)` - Generic converter with configuration
+
+#### Entity-Specific Converters
+Each entity includes convenient wrapper functions:
 - `entityFromSnapshot(snapshot)` - Converts Firestore snapshot to `Entity`
 - `entityFromSerialized(serialized)` - Converts `EntitySerialized` to `Entity`
+
+The entity-specific converters use the generic converters internally with pre-configured date field mappings.
 
 ### Example
 
