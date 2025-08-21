@@ -1,6 +1,6 @@
 import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from './converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from './typeUtils'
+import { fromSnapshot, fromSerialized } from '../utils/converters'
+import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
 
 export enum CueType {
   CUE = 'cue',

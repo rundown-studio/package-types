@@ -1,7 +1,7 @@
 import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from './converters'
-import { ReplaceWithString } from './typeUtils'
-import { REQUIRED } from './useDefaults'
+import { fromSnapshot, fromSerialized } from '../utils/converters'
+import { ReplaceWithString } from '../utils/typeUtils'
+import { REQUIRED } from '../utils/useDefaults'
 
 /**
  * Complete Cell type with all fields

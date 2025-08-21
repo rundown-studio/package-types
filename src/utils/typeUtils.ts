@@ -1,4 +1,4 @@
-import type { FirestoreTimestamp } from './FirebaseBuiltins'
+import type { FirestoreTimestamp } from '../types/FirebaseBuiltins'
 
 /**
  * Type utility to replace Date fields with FirestoreTimestamp

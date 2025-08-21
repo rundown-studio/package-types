@@ -1,4 +1,4 @@
-import type { DocumentSnapshot } from './FirebaseBuiltins'
+import type { DocumentSnapshot } from '../types/FirebaseBuiltins'
 
 /**
  * Configuration for converting from Firestore snapshot
