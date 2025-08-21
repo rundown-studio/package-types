@@ -1,4 +1,4 @@
-import type { Rundown } from './Rundown'
+import type { Rundown, TextVariables } from './Rundown'
 import type { RundownCue } from './Cue'
 import type { Mention } from './Mention'
 
@@ -8,6 +8,7 @@ export interface ApiV0Rundown {
   startTime: Rundown['startTime']
   endTime: Rundown['endTime']
   status: Rundown['status']
+  textVariables: TextVariables
   createdAt: Rundown['createdAt']
   updatedAt: Rundown['updatedAt']
 }
@@ -33,4 +34,13 @@ export interface ApiV0Mention {
   name: Mention['name']
   color: Mention['color']
   description: Mention['description']
+}
+
+/**
+ * External API representation of a Text Variable
+ * Simple key-value pair without timestamps
+ */
+export interface ApiV0TextVariable {
+  key: string
+  value: string
 }

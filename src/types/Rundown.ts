@@ -26,6 +26,12 @@ export interface RundownCueOrderItem {
 }
 
 /**
+ * Collection of text variables in a rundown
+ * Simple key-value string pairs
+ */
+export type TextVariables = Record<string, string>
+
+/**
  * Complete Rundown type with all fields
  * This is the main type for application logic
  */
@@ -50,6 +56,7 @@ export interface Rundown {
     currentCueHighlightColor?: string
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
   }
+  textVariables: TextVariables // Collection of text variables (key-value pairs)
   deletedAt: Date | null
   archivedAt: Date | null
   createdAt: Date
@@ -97,6 +104,7 @@ export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
     currentCueHighlightColor: '',
     todDisplayFormat: null,
   },
+  textVariables: {}, // Empty object for text variables
   deletedAt: null,
   archivedAt: null,
 })
