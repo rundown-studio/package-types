@@ -1,8 +1,9 @@
-import type { DocumentSnapshotId, FirestoreTimestamp } from './FirebaseBuiltins'
-import type { RundownCue } from './Cue'
+import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
 import { parse } from 'date-fns'
 import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
 import { generateSalt } from './utils/generateSalt'
+import { fromSnapshot, fromSerialized } from './converters'
+import { ReplaceWithTimestamp, ReplaceWithString } from './typeUtils'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -24,16 +25,21 @@ export interface RundownCueOrderItem {
   children?: RundownCueOrderItem[]
 }
 
-export interface RundownSnapshot {
+/**
+ * Complete Rundown type with all fields
+ * This is the main type for application logic
+ */
+export interface Rundown {
+  id: DocumentSnapshotId
   name: string
   teamId: DocumentSnapshotId | null
   eventId: DocumentSnapshotId | null
   runnerId: DocumentSnapshotId | null
   columns: DocumentSnapshotId[] // order of columns
   cues: RundownCueOrderItem[] // order of cues
-  startTime: FirestoreTimestamp | Date
-  endTime: FirestoreTimestamp | Date | null // OBSOLETE
-  startCueId: RundownCue['id'] | null
+  startTime: Date
+  endTime: Date | null
+  startCueId: DocumentSnapshotId | null
   salt: string
   status: RundownStatus
   timezone: string | null
@@ -44,20 +50,34 @@ export interface RundownSnapshot {
     currentCueHighlightColor?: string
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
   }
-  deletedAt: FirestoreTimestamp | Date | null
-  archivedAt: FirestoreTimestamp | Date | null
-}
-
-export interface Rundown extends RundownSnapshot {
-  id: DocumentSnapshotId
+  deletedAt: Date | null
+  archivedAt: Date | null
   createdAt: Date
   updatedAt: Date
 }
 
 /**
- * Note: Firestore doesn't support the value `undefined`, so we need to omit these keys instead.
+ * Fields added by the system (from snapshot metadata)
  */
-export const getRundownDefaults = (): RundownSnapshot => ({
+type RundownSystemFields = 'id' | 'createdAt' | 'updatedAt'
+
+/**
+ * Raw Firestore data structure for a Rundown document
+ * Contains Firestore Timestamp objects, no id/createdAt/updatedAt
+ */
+export type RundownFirestore = ReplaceWithTimestamp<Omit<Rundown, RundownSystemFields>>
+
+/**
+ * Serialized Rundown for API/network transmission
+ * Contains ISO date strings and includes id/createdAt/updatedAt
+ */
+export type RundownSerialized = ReplaceWithString<Rundown>
+
+/**
+ * Note: Firestore doesn't support the value `undefined`, so we need to omit these keys instead.
+ * Returns defaults with Date objects (not Firestore timestamps)
+ */
+export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
   name: '',
   teamId: null,
   eventId: null,
@@ -80,3 +100,21 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   deletedAt: null,
   archivedAt: null,
 })
+
+/**
+ * Rundown-specific converter from Firestore snapshot
+ */
+export function rundownFromSnapshot (snapshot: DocumentSnapshot): Rundown {
+  return fromSnapshot<RundownFirestore, Rundown>(snapshot, {
+    dateFields: ['startTime', 'endTime', 'deletedAt', 'archivedAt'],
+  })
+}
+
+/**
+ * Rundown-specific converter from serialized data
+ */
+export function rundownFromSerialized (serialized: RundownSerialized): Rundown {
+  return fromSerialized<RundownSerialized, Rundown>(serialized, {
+    dateFields: ['startTime', 'endTime', 'deletedAt', 'archivedAt', 'createdAt', 'updatedAt'],
+  })
+}
