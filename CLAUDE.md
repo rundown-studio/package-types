@@ -17,6 +17,10 @@ npm install
 npm test               # Run tests in watch mode
 npm run test:ci        # Run tests once (for CI)
 
+# Lint code
+npm run lint           # Check for linting errors
+npm run lint:fix       # Auto-fix linting errors where possible
+
 # Build the package
 npm run build          # Creates dist/ folder with compiled output
 ```
@@ -24,11 +28,18 @@ npm run build          # Creates dist/ folder with compiled output
 ### Code Quality
 ```bash
 # Lint code (uses ESLint with @stylistic/eslint-plugin)
-npx eslint src/
+npm run lint           # Check for linting errors
+npm run lint:fix       # Auto-fix linting errors where possible
 
 # Type checking is handled by the build process
 npm run build
 ```
+
+**IMPORTANT**: Always run `npm run lint` after making code changes to ensure code follows the project's ESLint rules.
+
+If there are linting errors:
+1. First try auto-fix: `npm run lint:fix`
+2. Manually address any remaining issues that can't be auto-fixed
 
 ## Architecture Overview
 

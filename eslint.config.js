@@ -39,7 +39,7 @@ export default [
       'src/**/*.ts',
     ],
     rules: {
-      ...stylistic.configs['recommended-flat'].rules,
+      ...stylistic.configs.recommended.rules,
       '@stylistic/quotes': ['warn', 'single'],
       '@stylistic/semi': ['warn', 'never'],
       '@stylistic/indent': ['warn', 2, { SwitchCase: 1 }],
