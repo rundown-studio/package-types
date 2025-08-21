@@ -14,8 +14,8 @@ This is the `@rundown-studio/types` package - a standalone TypeScript package th
 npm install
 
 # Run tests
-npm test
-npm run test:ci        # CI mode with coverage
+npm test               # Run tests in watch mode
+npm run test:ci        # Run tests once (for CI)
 
 # Build the package
 npm run build          # Creates dist/ folder with compiled output
@@ -34,8 +34,8 @@ npm run build
 
 ### Package Structure
 - **src/**: TypeScript source files containing type definitions
+  - **src/__tests__/**: Vitest files located close to the tested code
 - **dist/**: Built output (created by `npm run build`)
-- **tests/**: Jest test files for type utilities
 
 ### Key Type Categories
 - **Core Entities**: `Rundown`, `Cue`, `Cell`, `Column` - main business objects
@@ -101,7 +101,9 @@ Uses strict ESLint rules with @stylistic/eslint-plugin:
 - Targets ES2016 for broad compatibility
 
 ## Testing Strategy
-- Uses Jest with ES modules support
+- Uses Vitest for fast TypeScript testing
 - Focus on testing utility functions and type guards
-- Tests are in `tests/` directory
-- Run tests with `npm test` (development) or `npm run test:ci` (CI)
+- Tests are located in `__tests__/` directories close to the source files
+- Vitest configuration automatically finds tests in any `__tests__/` directory
+- Run tests with `npm test` (watch mode) or `npm run test:ci` (single run for CI)
+- Tests are written in TypeScript with full type checking
