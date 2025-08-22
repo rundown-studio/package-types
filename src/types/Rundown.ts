@@ -81,6 +81,11 @@ export type RundownFirestore = ReplaceWithTimestamp<Omit<Rundown, RundownSystemF
 export type RundownSerialized = ReplaceWithString<Rundown>
 
 /**
+ * @deprecated Use CueFirestore instead
+ */
+export type RundownSnapshot = Omit<Rundown, RundownSystemFields>
+
+/**
  * Note: Firestore doesn't support the value `undefined`, so we need to omit these keys instead.
  * Returns defaults with Date objects (not Firestore timestamps)
  */
