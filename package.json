@@ -1,6 +1,6 @@
 {
   "name": "@rundown-studio/types",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "Shared types for the Rundown Studio project",
   "license": "ISC",
   "author": "Lukas Hermann <hey@lukashermann.dev>",
