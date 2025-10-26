@@ -44,31 +44,64 @@ If there are linting errors:
 ## Architecture Overview
 
 ### Package Structure
-- **src/**: TypeScript source files containing type definitions
-  - **src/__tests__/**: Vitest files located close to the tested code
-- **dist/**: Built output (created by `npm run build`)
+```
+src/
+├── index.ts          # Main export file
+├── types/           # All type definitions
+│   ├── ApiV0.ts
+│   ├── Cell.ts
+│   ├── Column.ts
+│   ├── Cue.ts
+│   ├── FirebaseBuiltins.ts
+│   ├── Mention.ts
+│   ├── Rundown.ts
+│   ├── Runner.ts
+│   ├── Scheduler.ts
+│   └── Team.ts
+└── utils/           # All utility functions
+    ├── converters.ts
+    ├── generateSalt.ts
+    ├── typeUtils.ts
+    └── useDefaults.ts
+```
+
+### Three-Tier Type System
+Each entity follows a consistent three-tier pattern:
+
+1. **Main Type** (e.g., `Rundown`) - Application logic with JavaScript `Date` objects
+2. **Firestore Type** (e.g., `RundownFirestore`) - Raw Firestore data with `Timestamp` objects
+3. **Serialized Type** (e.g., `RundownSerialized`) - API/network data with ISO strings
 
 ### Key Type Categories
-- **Core Entities**: `Rundown`, `Cue`, `Cell`, `Column` - main business objects
+- **Core Entities**: `Rundown`, `Cue`, `Cell`, `Column`, `Mention` - main business objects
 - **Team Management**: `Team` - user and team-related types
 - **Scheduling**: `Runner`, `Scheduler` - timing and execution types
-- **API**: `ApiV0` - API interface definitions
+- **API**: `ApiV0` - External API interface definitions
 - **Firebase**: `FirebaseBuiltins` - Firebase-specific type extensions
-- **Utilities**: Helper functions and default value generators
+- **Utilities**: Generic converters, type transformations, and helpers
 
 ### Type Organization
-All types are exported from `src/index.ts` and organized by domain:
-- Each major entity has its own file (e.g., `Cue.ts`, `Rundown.ts`)
-- Related utilities are co-located in the same files
-- Common Firebase patterns are abstracted in `FirebaseBuiltins.ts`
+- All types are exported from `src/index.ts`
+- Types are organized by domain in the `types/` folder
+- Utilities are centralized in the `utils/` folder
+- Generic converters (`fromSnapshot`, `fromSerialized`) with entity-specific wrappers
 
 ## Development Guidelines
 
 ### Adding New Types
-1. Create types in the appropriate domain file (e.g., new cue-related types go in `Cue.ts`)
-2. Export the types from the domain file
-3. Re-export from `src/index.ts`
-4. Add tests if the types include utility functions
+1. Create types in the appropriate domain file in `src/types/` (e.g., new cue-related types go in `types/Cue.ts`)
+2. Follow the three-tier pattern: Main type, EntityFirestore, EntitySerialized
+3. Add entity-specific converter functions using the generic converters
+4. Export the types from the domain file
+5. Re-export from `src/index.ts`
+6. Add tests if the types include utility functions
+
+### Adding New Entities
+When adding a completely new entity:
+1. Create `types/NewEntity.ts` following the established pattern
+2. Use the generic converters from `utils/converters.ts`
+3. Add type transformations using utilities from `utils/typeUtils.ts`
+4. Add to `ApiV0.ts` if it needs external API exposure
 
 ### Type Conventions
 - Use PascalCase for type names
