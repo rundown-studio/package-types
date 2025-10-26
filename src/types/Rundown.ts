@@ -41,6 +41,7 @@ export interface Rundown {
   teamId: DocumentSnapshotId | null
   eventId: DocumentSnapshotId | null
   runnerId: DocumentSnapshotId | null
+  prompterId: DocumentSnapshotId | null
   columns: DocumentSnapshotId[] // order of columns
   cues: RundownCueOrderItem[] // order of cues
   startTime: Date
@@ -94,6 +95,7 @@ export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
   teamId: null,
   eventId: null,
   runnerId: null,
+  prompterId: null,
   columns: [],
   cues: [],
   startTime: parse('09:00:00', 'HH:mm:ss', new Date()),
