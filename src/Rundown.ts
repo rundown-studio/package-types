@@ -29,6 +29,7 @@ export interface RundownSnapshot {
   teamId: DocumentSnapshotId | null
   eventId: DocumentSnapshotId | null
   runnerId: DocumentSnapshotId | null
+  prompterId: DocumentSnapshotId | null
   columns: DocumentSnapshotId[] // order of columns
   cues: RundownCueOrderItem[] // order of cues
   startTime: FirestoreTimestamp | Date
@@ -62,6 +63,7 @@ export const getRundownDefaults = (): RundownSnapshot => ({
   teamId: null,
   eventId: null,
   runnerId: null,
+  prompterId: null,
   columns: [],
   cues: [],
   startTime: parse('09:00:00', 'HH:mm:ss', new Date()),
