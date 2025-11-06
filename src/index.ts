@@ -7,6 +7,7 @@
 // Types
 export * from './types/FirebaseBuiltins'
 export * from './types/Team'
+export * from './types/Event'
 export * from './types/Rundown'
 export * from './types/Cue'
 export * from './types/Column'
