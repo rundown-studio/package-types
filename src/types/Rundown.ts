@@ -11,6 +11,19 @@ export enum RundownAccess {
   READ = 'read',
 }
 
+/**
+ * Bitwise permission flags for rundown access control
+ * Use bitwise operations to check permissions: token.permissions & RundownPermission.EDIT_FULL
+ */
+export enum RundownPermission {
+  VIEW = 1,
+  EDIT_LIMITED = 2, // Only edit cells of one selected column
+  EDIT_FULL = 4,
+  SHOWCALL = 8,
+  INVITE = 16,
+  FULL_ACCESS = 31, // All permissions combined (1 + 2 + 4 + 8 + 16)
+}
+
 export enum RundownStatus {
   IMPORTED = 'imported',
   DRAFT = 'draft',
@@ -23,6 +36,18 @@ export enum RundownStatus {
 export interface RundownCueOrderItem {
   id: DocumentSnapshotId
   children?: RundownCueOrderItem[]
+}
+
+/**
+ * JWT token payload for rundown authentication
+ * Contains permission flags for access control
+ */
+export interface RundownTokenPayload {
+  rundownId: DocumentSnapshotId
+  permissions: RundownPermission[]
+
+  // Legacy support during transition
+  access: RundownAccess
 }
 
 /**

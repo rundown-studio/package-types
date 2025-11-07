@@ -4,12 +4,21 @@ import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
 
 export enum UserRole {
   TEAM_ADMIN = 'team_admin',
-  TEAM_BILLING = 'team_billing',
-  TEAM_MEMBER = 'team_member',
+  TEAM_SHOWCALLER = 'team_showcaller',
+  TEAM_EDITOR = 'team_editor',
+  TEAM_VIEWER = 'team_viewer',
+  EVENT_SHOWCALLER = 'event_showcaller',
+  EVENT_EDITOR = 'event_editor',
+  EVENT_VIEWER = 'event_viewer',
+
+  // DEPRECATED
+  TEAM_BILLING_DEPRECATED = 'team_billing', // --> removed
+  TEAM_MEMBER_DEPRECATED = 'team_member', // --> TEAM_SHOWCALLER
 }
 
 export interface TeamMember {
   role: UserRole
+  eventIds: DocumentSnapshotId[]
   createdAt: Date
 }
 
@@ -67,7 +76,8 @@ export const getTeamDefaults = (): Omit<Team, TeamSystemFields> => ({
 })
 
 export const getMemberDefaults = (): TeamMember => ({
-  role: UserRole.TEAM_MEMBER,
+  role: UserRole.TEAM_SHOWCALLER,
+  eventIds: [],
   createdAt: new Date(),
 })
 
