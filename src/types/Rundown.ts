@@ -12,16 +12,28 @@ export enum RundownAccess {
 }
 
 /**
- * Bitwise permission flags for rundown access control
- * Use bitwise operations to check permissions: token.permissions & RundownPermission.EDIT_FULL
+ * Primitive bitwise permission flags for rundown access control (powers of 2)
+ * Use bitwise operations to check permissions: token.permissions & RundownPermission.EDIT
  */
 export enum RundownPermission {
-  VIEW = 1,
-  EDIT_LIMITED = 2, // Only edit cells of one selected column
-  EDIT_FULL = 4,
-  SHOWCALL = 8,
-  INVITE = 16,
-  FULL_ACCESS = 31, // All permissions combined (1 + 2 + 4 + 8 + 16)
+  VIEW = 1,          // 000001 - read-only access
+  EDIT = 2,          // 000010 - edit all content
+  SHOWCALL = 4,      // 000100 - run/control the show
+  MANAGE = 8,        // 001000 - manage settings, access, invites
+  // 16 reserved for future common permission
+  EDIT_PARTIAL = 32, // 100000 - edit assigned columns only (special case)
+}
+
+/**
+ * Precomposed permission sets for common roles
+ * Each set combines multiple RundownPermission primitives
+ */
+export enum RundownPermissionSet {
+  VIEWER =         1,              // 000001
+  EDITOR =         1 | 2,          // 000011
+  SHOW_CALLER =    1 | 2 | 4,      // 000111
+  ADMIN =          1 | 2 | 4 | 8,  // 001111
+  PARTIAL_EDITOR = 1 | 32,         // 100001
 }
 
 export enum RundownStatus {
@@ -41,13 +53,16 @@ export interface RundownCueOrderItem {
 /**
  * JWT token payload for rundown authentication
  * Contains permission flags for access control
+ *
+ * 1. Bitwise permission flags stored as a single number
+ *    Use bitwise AND to check: (payload.permissions & RundownPermission.EDIT) !== 0
+ *    Assign using enum values: RundownPermissionSet.EDITOR or custom combinations
+ * 2. Legacy support during transition
  */
 export interface RundownTokenPayload {
   rundownId: DocumentSnapshotId
-  permissions: RundownPermission[]
-
-  // Legacy support during transition
-  access: RundownAccess
+  permissions: number /* 1 */
+  access: RundownAccess /* 2 */
 }
 
 /**

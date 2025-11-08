@@ -47,6 +47,7 @@ export default [
       '@stylistic/space-before-function-paren': ['warn', 'always'],
       '@stylistic/object-curly-spacing': ['warn', 'always'],
       '@stylistic/brace-style': ['warn', '1tbs'],
+      '@stylistic/no-multi-spaces': 'off',
     },
   },
 
