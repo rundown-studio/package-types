@@ -31,7 +31,7 @@ export enum RundownPermission {
 export enum RundownPermissionSet {
   VIEWER =         1,              // 000001
   EDITOR =         1 | 2,          // 000011
-  SHOW_CALLER =    1 | 2 | 4,      // 000111
+  SHOWCALLER =     1 | 2 | 4,      // 000111
   ADMIN =          1 | 2 | 4 | 8,  // 001111
   PARTIAL_EDITOR = 1 | 32,         // 100001
 }
