@@ -1,4 +1,4 @@
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
+import type { DocumentSnapshotId, DocumentSnapshot, UserRecordId } from './FirebaseBuiltins'
 import { fromSnapshot, fromSerialized } from '../utils/converters'
 import { ReplaceWithString } from '../utils/typeUtils'
 import { REQUIRED } from '../utils/useDefaults'
@@ -14,6 +14,7 @@ export interface Cell {
   content: any
   createdAt: Date
   updatedAt: Date
+  uid?: UserRecordId
 }
 
 /**
