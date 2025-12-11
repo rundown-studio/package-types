@@ -17,6 +17,21 @@ export interface Cell {
   uid?: UserRecordId
 }
 
+export interface CellHistory {
+  content: any
+  uid: UserRecordId | null
+  createdAt: Date
+}
+
+export type CellHistoryWithUsers = {
+  history: CellHistory[]
+  users: {
+    [uid: string]: {
+      displayName: string | undefined
+    }
+  }
+}
+
 /**
  * Fields added by the system (from snapshot metadata)
  */
