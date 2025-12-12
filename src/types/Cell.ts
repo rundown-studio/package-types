@@ -18,6 +18,7 @@ export interface Cell {
 }
 
 export interface CellHistory {
+  id: DocumentSnapshotId
   content: any
   uid: UserRecordId | null
   createdAt: Date
@@ -50,9 +51,14 @@ export type CellFirestore = Omit<Cell, CellSystemFields>
 export type CellSerialized = ReplaceWithString<Cell>
 
 /**
+ * Fields added by the system (from snapshot metadata)
+ */
+type CellHistorySystemFields = 'id' | 'updatedAt'
+
+/**
  * Raw Firestore data structure for a Cell History document
  */
-export type CellHistoryFirestore = CellHistory
+export type CellHistoryFirestore = Omit<CellHistory, CellHistorySystemFields>
 
 /**
  * @deprecated Use Cell instead
