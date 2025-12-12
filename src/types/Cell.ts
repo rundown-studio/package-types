@@ -50,6 +50,11 @@ export type CellFirestore = Omit<Cell, CellSystemFields>
 export type CellSerialized = ReplaceWithString<Cell>
 
 /**
+ * Raw Firestore data structure for a Cell History document
+ */
+export type CellHistoryFirestore = CellHistory
+
+/**
  * @deprecated Use Cell instead
  */
 export type RundownCell = Cell
@@ -85,5 +90,14 @@ export function cellFromSerialized (serialized: CellSerialized): Cell {
   return fromSerialized<CellSerialized, Cell>(serialized, {
     // Only system dates need conversion
     dateFields: ['createdAt', 'updatedAt'],
+  })
+}
+
+/**
+ * Cell-history-specific converter from Firestore snapshot
+ */
+export function cellHistoryFromSnapshot (snapshot: DocumentSnapshot): CellHistory {
+  return fromSnapshot<CellHistoryFirestore, CellHistory>(snapshot, {
+    dateFields: ['createdAt'],
   })
 }
