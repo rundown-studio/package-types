@@ -96,6 +96,8 @@ export interface Rundown {
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
+    cueIndexStartFrom?: number
+    cueIndexPrefix?: string | null
   }
   textVariables: TextVariables // Collection of text variables (key-value pairs)
   deletedAt: Date | null
