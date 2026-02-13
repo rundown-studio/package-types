@@ -98,6 +98,7 @@ export interface Rundown {
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
     cueIndexStartFrom?: number
     cueIndexPrefix?: string | null
+    cueIndexPadding?: number
   }
   textVariables: TextVariables // Collection of text variables (key-value pairs)
   deletedAt: Date | null
