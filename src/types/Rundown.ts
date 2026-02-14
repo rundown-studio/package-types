@@ -96,9 +96,9 @@ export interface Rundown {
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
-    cueIndexStartFrom?: number
-    cueIndexPrefix?: string | null
-    cueIndexPadding?: number
+    cueIndexStartFrom: number
+    cueIndexPrefix: string
+    cueIndexPadding: number
   }
   textVariables: TextVariables // Collection of text variables (key-value pairs)
   deletedAt: Date | null
@@ -153,6 +153,9 @@ export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
     currentCueHighlightColor: '',
     todDisplayFormat: null,
+    cueIndexStartFrom: 1,
+    cueIndexPrefix: '',
+    cueIndexPadding: 1,
   },
   textVariables: {}, // Empty object for text variables
   deletedAt: null,
