@@ -14,6 +14,7 @@ export enum CueStartMode {
 }
 
 export interface CueSettings {
+  skipDuringShow: boolean
   hideOnPdf: boolean
   hideOnCsv: boolean
   preventEdits: boolean
@@ -85,6 +86,7 @@ export const getCueDefaults = (): Omit<Cue, CueSystemFields> => ({
   scheduled: false,
   deletedAt: null,
   settings: {
+    skipDuringShow: false,
     hideOnPdf: false,
     hideOnCsv: false,
     preventEdits: false,
