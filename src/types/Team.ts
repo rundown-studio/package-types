@@ -12,7 +12,7 @@ export enum UserRole {
   EVENT_VIEWER = 'event_viewer',
 
   // DEPRECATED
-  TEAM_BILLING_DEPRECATED = 'team_billing', // --> removed
+  TEAM_BILLING_DEPRECATED = 'team_billing', // --> TEAM_VIEWER
   TEAM_MEMBER_DEPRECATED = 'team_member', // --> TEAM_SHOWCALLER
 }
 
