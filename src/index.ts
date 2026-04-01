@@ -16,6 +16,7 @@ export * from './types/Runner'
 export * from './types/Mention'
 export * from './types/ApiV0'
 export * from './types/Scheduler'
+export * from './types/Billing'
 
 // Utils
 export * from './utils/useDefaults'
