@@ -35,12 +35,17 @@ export type CellHistoryWithUsers = {
 
 /**
  * Fields added by the system (from snapshot metadata)
+ *
+ * `updatedAt` is intentionally NOT in this set: it is stored as a real
+ * document field (set via `serverTimestamp()` on every write) so the
+ * optimistic-locking gate can read it client-side, where the web SDK does
+ * not expose `snapshot.updateTime`.
  */
-type CellSystemFields = 'id' | 'createdAt' | 'updatedAt'
+type CellSystemFields = 'id' | 'createdAt'
 
 /**
  * Raw Firestore data structure for a Cell document
- * No date fields to transform, just omits system fields
+ * Includes `updatedAt` as a stored field; omits id/createdAt (metadata).
  */
 export type CellFirestore = Omit<Cell, CellSystemFields>
 
@@ -77,6 +82,13 @@ export const getCellDefaults = (): Omit<Cell, CellSystemFields> => ({
   cueId: REQUIRED,
   columnId: REQUIRED,
   content: {},
+  // Epoch sentinel for legacy cells without a stored `updatedAt`. Server
+  // create/update paths spread `FieldValue.serverTimestamp()` after this,
+  // so written cells always carry a real timestamp. The sentinel only
+  // surfaces on reads of pre-optimistic-locking cells; the server gate
+  // (`CellService.updateCell`) treats a missing stored field as "no
+  // precondition violated" so the next PATCH heals the cell.
+  updatedAt: new Date(0),
 })
 
 /**
@@ -84,8 +96,7 @@ export const getCellDefaults = (): Omit<Cell, CellSystemFields> => ({
  */
 export function cellFromSnapshot (snapshot: DocumentSnapshot): Cell {
   return fromSnapshot<CellFirestore, Cell>(snapshot, {
-    // No date fields to convert for Cell
-    dateFields: [],
+    dateFields: ['updatedAt'],
   })
 }
 

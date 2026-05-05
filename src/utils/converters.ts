@@ -17,7 +17,9 @@ export interface FromSerializedConfig {
 
 /**
  * Generic converter from Firestore DocumentSnapshot to entity with Dates
- * - Adds id, createdAt, updatedAt from snapshot metadata
+ * - Adds id from snapshot
+ * - Reads createdAt/updatedAt from data when present; falls back to
+ *   snapshot metadata, then defaults, then `new Date()`
  * - Converts FirestoreTimestamp fields to Date objects
  * - Applies defaults if provided
  */
@@ -34,9 +36,15 @@ export function fromSnapshot<TFirestore, TEntity> (
     ...config.defaults,
     ...data,
     id: snapshot.id,
-    createdAt: snapshot.createTime ? snapshot.createTime.toDate() : new Date(),
-    updatedAt: snapshot.updateTime ? snapshot.updateTime.toDate() : new Date(),
   }
+
+  // Backfill createdAt/updatedAt from snapshot metadata only when data and
+  // defaults didn't supply a value. Some entities (e.g. Cell) store
+  // `updatedAt` as a real document field for client-side optimistic
+  // locking — preserving the data value here means downstream callers see
+  // the stored timestamp, not the snapshot's metadata.
+  if (!result.createdAt) result.createdAt = snapshot.createTime ? snapshot.createTime.toDate() : new Date(0)
+  if (!result.updatedAt) result.updatedAt = snapshot.updateTime ? snapshot.updateTime.toDate() : new Date(0)
 
   // Convert date fields from FirestoreTimestamp to Date
   if (config.dateFields) {
