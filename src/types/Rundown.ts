@@ -93,6 +93,13 @@ export interface Rundown {
   logo: string | null
   settings: {
     outputConfig?: string
+    outputMessage?: {
+      text: string
+      visible: boolean
+      color: string
+      bold: boolean
+      underline: boolean
+    }
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
     todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
@@ -150,6 +157,13 @@ export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
   logo: '',
   settings: {
     outputConfig: '',
+    outputMessage: {
+      text: '',
+      visible: false,
+      color: '#ffffff',
+      bold: false,
+      underline: false,
+    },
     cueBackgroundColours: CUE_BACKGROUND_COLORS,
     currentCueHighlightColor: '',
     todDisplayFormat: null,
