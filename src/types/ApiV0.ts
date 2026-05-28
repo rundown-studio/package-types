@@ -20,7 +20,12 @@ export interface ApiV0Cue {
   subtitle: RundownCue['subtitle']
   duration: RundownCue['duration']
   backgroundColor: RundownCue['backgroundColor']
-  locked: RundownCue['locked']
+  /**
+   * Legacy v0 wire field. Replaced by `settings.preventEdits` on the canonical
+   * Cue type (RSH-260). Kept here as `boolean` because v0 sockets still
+   * serialize it via `APIV0_CUE_KEYS` and external v0 consumers may read it.
+   */
+  locked: boolean
   createdAt: RundownCue['createdAt']
   updatedAt: RundownCue['updatedAt']
 }

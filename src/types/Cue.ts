@@ -34,7 +34,6 @@ export interface Cue {
   startDatePlus: number
   duration: number
   backgroundColor: string | null
-  locked: boolean // LEGACY kept for backward compatibility, moved to settings.preventEdits
   scheduled: boolean // If scheduled to auto-start
   deletedAt: Date | null
   settings: CueSettings // Optional for backward compatibility, but should always be present after migration
@@ -82,7 +81,6 @@ export const getCueDefaults = (): Omit<Cue, CueSystemFields> => ({
   startDatePlus: 0,
   duration: 0, // 0 seconds
   backgroundColor: '',
-  locked: false,
   scheduled: false,
   deletedAt: null,
   settings: {
