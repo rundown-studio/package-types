@@ -69,6 +69,16 @@ export interface ApiToken {
   scope: ApiTokenScope
   /** Required when the scope is `rundown_*`; null for `team_*` scopes. */
   rundownId: DocumentSnapshotId | null
+  /**
+   * The signed JWT, persisted at mint time so the dashboard can re-reveal it.
+   * Optional: tokens minted before this field existed (and not-yet-backfilled
+   * legacy tokens) won't have it.
+   *
+   * SECRET — this is the bearer credential itself. Never include it in list
+   * responses or anywhere the full token set is paged through; expose it only
+   * via an explicit, role-gated single-token fetch.
+   */
+  token?: string
 }
 
 type ApiTokenSystemFields = 'id' | 'createdAt' | 'updatedAt'
