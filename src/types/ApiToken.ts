@@ -8,13 +8,13 @@ import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
  * payload stays compact:
  *
  *   - first char: `t` = team scope, `r` = rundown scope
- *   - second char: `a` = admin, `s` = showcaller, `e` = editor, `v` = viewer
+ *   - second char: `o` = owner, `s` = showcaller, `e` = editor, `v` = viewer
  *
- * Rundown-scoped tokens intentionally have no `admin` variant — destructive
- * operations against a single rundown still flow through team-level admin.
+ * Rundown-scoped tokens intentionally have no `owner` variant — destructive
+ * operations against a single rundown still flow through team-level owner.
  */
 export enum ApiTokenScope {
-  TEAM_ADMIN = 'ta',
+  TEAM_OWNER = 'to',
   TEAM_SHOWCALLER = 'ts',
   TEAM_EDITOR = 'te',
   TEAM_VIEWER = 'tv',
