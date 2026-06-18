@@ -11,6 +11,9 @@ export enum RundownAccess {
   READ = 'read',
 }
 
+/** Clock format for time-of-day displays. `null` on the setting = locale default. */
+export type TodDisplayFormat = '12hNoAmPm' | '12h' | '24h'
+
 /**
  * Primitive bitwise permission flags for rundown access control (powers of 2)
  * Use bitwise operations to check permissions: token.permissions & RundownPermission.EDIT
@@ -102,7 +105,7 @@ export interface Rundown {
     }
     cueBackgroundColours?: string[]
     currentCueHighlightColor?: string
-    todDisplayFormat?: '12hNoAmPm' | '12h' | '24h' | null
+    todDisplayFormat?: TodDisplayFormat | null
     cueIndexStartFrom: number
     cueIndexPrefix: string
     cueIndexPadding: number
