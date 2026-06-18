@@ -60,7 +60,8 @@ export interface Plan {
 
 export const getPlanDefaults = (): Plan => ({
   name: PlanNames.STUDIO_FREE,
-  imageUrl: 'https://firebasestorage.googleapis.com/v0/b/rundown-studio-46e96.appspot.com/o/paddle%2Fplan-studio-free.png?alt=media&token=1b5018d3-f43b-41f4-a568-0663bb0edfec',
+  imageUrl:
+    'https://firebasestorage.googleapis.com/v0/b/rundown-studio-46e96.appspot.com/o/paddle%2Fplan-studio-free.png?alt=media&token=1b5018d3-f43b-41f4-a568-0663bb0edfec',
   limits: {
     members: 1,
     columns: 3,

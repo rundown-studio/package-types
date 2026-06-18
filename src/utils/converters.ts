@@ -23,7 +23,7 @@ export interface FromSerializedConfig {
  * - Converts FirestoreTimestamp fields to Date objects
  * - Applies defaults if provided
  */
-export function fromSnapshot<TFirestore, TEntity> (
+export function fromSnapshot<TFirestore, TEntity>(
   snapshot: DocumentSnapshot,
   config: FromSnapshotConfig = {},
 ): TEntity {
@@ -65,7 +65,7 @@ export function fromSnapshot<TFirestore, TEntity> (
  * Generic converter from serialized data to entity with Dates
  * - Converts ISO string fields to Date objects
  */
-export function fromSerialized<TSerialized extends Record<string, any>, TEntity> (
+export function fromSerialized<TSerialized extends Record<string, any>, TEntity>(
   serialized: TSerialized,
   config: FromSerializedConfig = {},
 ): TEntity {
@@ -77,7 +77,7 @@ export function fromSerialized<TSerialized extends Record<string, any>, TEntity>
       const value = result[field]
       if (typeof value === 'string') {
         const parsed = new Date(value)
-        result[field] = isNaN(parsed.getTime()) ? null : parsed
+        result[field] = Number.isNaN(parsed.getTime()) ? null : parsed
       } else if (value === null || value === undefined) {
         result[field] = null
       }

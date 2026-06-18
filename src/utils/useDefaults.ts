@@ -6,10 +6,7 @@ export const REQUIRED = 'REQUIRED'
  * @param  {Record<string, any>} defaults
  * @return {Record<string, any>}
  */
-export function useDefaults (
-  values: Record<string, any>,
-  defaults: Record<string, any>,
-): Record<string, any> {
+export function useDefaults(values: Record<string, any>, defaults: Record<string, any>): Record<string, any> {
   const output: Record<string, any> = { ...values }
   for (const key in defaults) {
     if (defaults[key] === REQUIRED) {

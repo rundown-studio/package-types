@@ -27,15 +27,15 @@ npm run build          # Creates dist/ folder with compiled output
 
 ### Code Quality
 ```bash
-# Lint code (uses ESLint with @stylistic/eslint-plugin)
-npm run lint           # Check for linting errors
-npm run lint:fix       # Auto-fix linting errors where possible
+# Lint and format code (uses Biome)
+npm run lint           # Check for linting/formatting errors
+npm run lint:fix       # Auto-fix errors where possible (biome check --write)
 
-# Type checking is handled by the build process
-npm run build
+# Type checking
+npm run typecheck      # tsc --noEmit
 ```
 
-**IMPORTANT**: Always run `npm run lint` after making code changes to ensure code follows the project's ESLint rules.
+**IMPORTANT**: Always run `npm run lint` after making code changes to ensure code follows the project's Biome rules.
 
 If there are linting errors:
 1. First try auto-fix: `npm run lint:fix`
@@ -117,10 +117,10 @@ When adding a completely new entity:
 ## Build and Publishing
 
 ### Build Process
-- Uses `tsup` for fast TypeScript compilation
+- Uses `tsdown` (Rolldown-powered) for fast TypeScript compilation
 - Generates both ESM and CommonJS outputs
-- Creates TypeScript declaration files
-- Output formats: `dist/index.js` (ESM), `dist/index.cjs` (CommonJS), `dist/index.d.ts` (types)
+- Creates TypeScript declaration files for each format
+- Output formats: `dist/index.mjs` (ESM), `dist/index.cjs` (CommonJS), `dist/index.d.mts` + `dist/index.d.cts` (types)
 
 ### Package Configuration
 - Supports both `import` and `require` through dual package exports
@@ -129,20 +129,20 @@ When adding a completely new entity:
 
 ## Code Quality Requirements
 
-### ESLint Configuration
-Uses strict ESLint rules with @stylistic/eslint-plugin:
-- **No semicolons** at end of statements
+### Biome Configuration
+Linting and formatting are handled by Biome (`biome.json`):
+- **No semicolons** at end of statements (`semicolons: asNeeded`)
 - **Single quotes** for strings
-- **Trailing commas** required in multi-line structures
+- **Trailing commas** required in multi-line structures (`trailingCommas: all`)
 - **2-space indentation**
-- **Space before function parentheses**
-- **Object curly spacing** required
+- **120 character line width**
+- `noExplicitAny` is off; tests disable `noUnusedExpressions`
 
 ### TypeScript Configuration
 - **Strict mode** enabled
 - **ESNext modules** for modern JavaScript features
-- **Node module resolution**
-- Targets ES2016 for broad compatibility
+- **Bundler module resolution**
+- Targets ES2022
 
 ## Testing Strategy
 - Uses Vitest for fast TypeScript testing

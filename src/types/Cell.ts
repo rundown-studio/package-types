@@ -1,7 +1,7 @@
-import type { DocumentSnapshotId, DocumentSnapshot, UserRecordId } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString } from '../utils/typeUtils'
 import { REQUIRED } from '../utils/useDefaults'
+import type { DocumentSnapshot, DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 /**
  * Complete Cell type with all fields
@@ -94,7 +94,7 @@ export const getCellDefaults = (): Omit<Cell, CellSystemFields> => ({
 /**
  * Cell-specific converter from Firestore snapshot
  */
-export function cellFromSnapshot (snapshot: DocumentSnapshot): Cell {
+export function cellFromSnapshot(snapshot: DocumentSnapshot): Cell {
   return fromSnapshot<CellFirestore, Cell>(snapshot, {
     dateFields: ['updatedAt'],
   })
@@ -103,7 +103,7 @@ export function cellFromSnapshot (snapshot: DocumentSnapshot): Cell {
 /**
  * Cell-specific converter from serialized data
  */
-export function cellFromSerialized (serialized: CellSerialized): Cell {
+export function cellFromSerialized(serialized: CellSerialized): Cell {
   return fromSerialized<CellSerialized, Cell>(serialized, {
     // Only system dates need conversion
     dateFields: ['createdAt', 'updatedAt'],
@@ -113,7 +113,7 @@ export function cellFromSerialized (serialized: CellSerialized): Cell {
 /**
  * Cell-history-specific converter from Firestore snapshot
  */
-export function cellHistoryFromSnapshot (snapshot: DocumentSnapshot): CellHistory {
+export function cellHistoryFromSnapshot(snapshot: DocumentSnapshot): CellHistory {
   return fromSnapshot<CellHistoryFirestore, CellHistory>(snapshot, {
     dateFields: ['createdAt'],
   })

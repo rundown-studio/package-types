@@ -1,6 +1,6 @@
-import type { Rundown, TextVariables } from './Rundown'
 import type { RundownCue } from './Cue'
 import type { Mention } from './Mention'
+import type { Rundown, TextVariables } from './Rundown'
 
 export interface ApiV0Rundown {
   id: Rundown['id']

@@ -1,6 +1,6 @@
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId } from './FirebaseBuiltins'
 
 export enum CueType {
   CUE = 'cue',
@@ -94,7 +94,7 @@ export const getCueDefaults = (): Omit<Cue, CueSystemFields> => ({
 /**
  * Cue-specific converter from Firestore snapshot
  */
-export function cueFromSnapshot (snapshot: DocumentSnapshot): Cue {
+export function cueFromSnapshot(snapshot: DocumentSnapshot): Cue {
   return fromSnapshot<CueFirestore, Cue>(snapshot, {
     dateFields: ['startTime', 'deletedAt'],
   })
@@ -103,7 +103,7 @@ export function cueFromSnapshot (snapshot: DocumentSnapshot): Cue {
 /**
  * Cue-specific converter from serialized data
  */
-export function cueFromSerialized (serialized: CueSerialized): Cue {
+export function cueFromSerialized(serialized: CueSerialized): Cue {
   return fromSerialized<CueSerialized, Cue>(serialized, {
     dateFields: ['startTime', 'deletedAt', 'createdAt', 'updatedAt'],
   })

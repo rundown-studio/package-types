@@ -1,7 +1,7 @@
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
 import { generateSalt } from '../utils/generateSalt'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId } from './FirebaseBuiltins'
 
 /**
  * Complete Event type with all fields
@@ -52,7 +52,7 @@ export const getEventDefaults = (): Omit<Event, EventSystemFields> => ({
 /**
  * Event-specific converter from Firestore snapshot
  */
-export function eventFromSnapshot (snapshot: DocumentSnapshot): Event {
+export function eventFromSnapshot(snapshot: DocumentSnapshot): Event {
   return fromSnapshot<EventFirestore, Event>(snapshot, {
     dateFields: ['deletedAt', 'archivedAt'],
   })
@@ -61,7 +61,7 @@ export function eventFromSnapshot (snapshot: DocumentSnapshot): Event {
 /**
  * Event-specific converter from serialized data
  */
-export function eventFromSerialized (serialized: EventSerialized): Event {
+export function eventFromSerialized(serialized: EventSerialized): Event {
   return fromSerialized<EventSerialized, Event>(serialized, {
     dateFields: ['deletedAt', 'archivedAt', 'createdAt', 'updatedAt'],
   })

@@ -1,9 +1,9 @@
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { parse } from 'date-fns'
 import { CUE_BACKGROUND_COLORS } from '@rundown-studio/consts'
+import { parse } from 'date-fns'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
 import { generateSalt } from '../utils/generateSalt'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId } from './FirebaseBuiltins'
 
 export enum RundownAccess {
   WRITE = 'write',
@@ -16,10 +16,10 @@ export enum RundownAccess {
  * Use bitwise operations to check permissions: token.permissions & RundownPermission.EDIT
  */
 export enum RundownPermission {
-  VIEW = 1,          // 000001 - read-only access
-  EDIT = 2,          // 000010 - edit all content
-  SHOWCALL = 4,      // 000100 - run/control the show
-  MANAGE = 8,        // 001000 - manage settings, access, invites
+  VIEW = 1, // 000001 - read-only access
+  EDIT = 2, // 000010 - edit all content
+  SHOWCALL = 4, // 000100 - run/control the show
+  MANAGE = 8, // 001000 - manage settings, access, invites
   // 16 reserved for future common permission
   EDIT_PARTIAL = 32, // 100000 - edit assigned columns only (special case)
 }
@@ -29,11 +29,11 @@ export enum RundownPermission {
  * Each set combines multiple RundownPermission primitives
  */
 export enum RundownPermissionSet {
-  VIEWER =         1,              // 000001
-  EDITOR =         1 | 2,          // 000011
-  SHOWCALLER =     1 | 2 | 4,      // 000111
-  ADMIN =          1 | 2 | 4 | 8,  // 001111
-  PARTIAL_EDITOR = 1 | 32,         // 100001
+  VIEWER = 1, // 000001
+  EDITOR = 1 | 2, // 000011
+  SHOWCALLER = 1 | 2 | 4, // 000111
+  ADMIN = 1 | 2 | 4 | 8, // 001111
+  PARTIAL_EDITOR = 1 | 32, // 100001
 }
 
 export enum RundownStatus {
@@ -179,7 +179,7 @@ export const getRundownDefaults = (): Omit<Rundown, RundownSystemFields> => ({
 /**
  * Rundown-specific converter from Firestore snapshot
  */
-export function rundownFromSnapshot (snapshot: DocumentSnapshot): Rundown {
+export function rundownFromSnapshot(snapshot: DocumentSnapshot): Rundown {
   return fromSnapshot<RundownFirestore, Rundown>(snapshot, {
     dateFields: ['startTime', 'endTime', 'deletedAt', 'archivedAt'],
   })
@@ -188,7 +188,7 @@ export function rundownFromSnapshot (snapshot: DocumentSnapshot): Rundown {
 /**
  * Rundown-specific converter from serialized data
  */
-export function rundownFromSerialized (serialized: RundownSerialized): Rundown {
+export function rundownFromSerialized(serialized: RundownSerialized): Rundown {
   return fromSerialized<RundownSerialized, Rundown>(serialized, {
     dateFields: ['startTime', 'endTime', 'deletedAt', 'archivedAt', 'createdAt', 'updatedAt'],
   })

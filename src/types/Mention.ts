@@ -1,6 +1,6 @@
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId } from './FirebaseBuiltins'
 
 /**
  * Complete Mention type with all fields
@@ -47,7 +47,7 @@ export const getMentionDefaults = (): Omit<Mention, MentionSystemFields> => ({
 /**
  * Mention-specific converter from Firestore snapshot
  */
-export function mentionFromSnapshot (snapshot: DocumentSnapshot): Mention {
+export function mentionFromSnapshot(snapshot: DocumentSnapshot): Mention {
   return fromSnapshot<MentionFirestore, Mention>(snapshot, {
     // Mention has no Date fields besides system fields
     dateFields: [],
@@ -57,7 +57,7 @@ export function mentionFromSnapshot (snapshot: DocumentSnapshot): Mention {
 /**
  * Mention-specific converter from serialized data
  */
-export function mentionFromSerialized (serialized: MentionSerialized): Mention {
+export function mentionFromSerialized(serialized: MentionSerialized): Mention {
   return fromSerialized<MentionSerialized, Mention>(serialized, {
     dateFields: ['createdAt', 'updatedAt'],
   })

@@ -1,6 +1,6 @@
-import type { DocumentSnapshotId, UserRecordId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export type ColumnType = 'richtext' | 'select' | 'images' | 'attachments'
 
@@ -61,7 +61,7 @@ export const getColumnDefaults = (): Omit<Column, ColumnSystemFields> => ({
 /**
  * Column-specific converter from Firestore snapshot
  */
-export function columnFromSnapshot (snapshot: DocumentSnapshot): Column {
+export function columnFromSnapshot(snapshot: DocumentSnapshot): Column {
   return fromSnapshot<ColumnFirestore, Column>(snapshot, {
     dateFields: ['deletedAt'],
   })
@@ -70,7 +70,7 @@ export function columnFromSnapshot (snapshot: DocumentSnapshot): Column {
 /**
  * Column-specific converter from serialized data
  */
-export function columnFromSerialized (serialized: ColumnSerialized): Column {
+export function columnFromSerialized(serialized: ColumnSerialized): Column {
   return fromSerialized<ColumnSerialized, Column>(serialized, {
     dateFields: ['deletedAt', 'createdAt', 'updatedAt'],
   })

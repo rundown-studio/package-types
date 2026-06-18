@@ -1,6 +1,6 @@
-import type { DocumentSnapshotId, UserRecordId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 export enum UserRole {
   TEAM_ADMIN = 'team_admin',
@@ -85,7 +85,7 @@ export const getMemberDefaults = (): TeamMember => ({
  * Team-specific converter from Firestore snapshot
  * Note: This doesn't handle nested TeamMember dates - those need special handling
  */
-export function teamFromSnapshot (snapshot: DocumentSnapshot): Team {
+export function teamFromSnapshot(snapshot: DocumentSnapshot): Team {
   const team = fromSnapshot<TeamFirestore, Team>(snapshot, {
     // No top-level date fields in Team
     dateFields: [],
@@ -119,7 +119,7 @@ export function teamFromSnapshot (snapshot: DocumentSnapshot): Team {
  * Team-specific converter from serialized data
  * Note: This handles nested TeamMember dates
  */
-export function teamFromSerialized (serialized: TeamSerialized): Team {
+export function teamFromSerialized(serialized: TeamSerialized): Team {
   const team = fromSerialized<TeamSerialized, Team>(serialized, {
     dateFields: ['createdAt', 'updatedAt'],
   })

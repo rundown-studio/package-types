@@ -1,6 +1,6 @@
-import type { DocumentSnapshotId, UserRecordId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId, UserRecordId } from './FirebaseBuiltins'
 
 /**
  * Combined API token scope + permission level. Mirrors how UserRole bundles
@@ -100,14 +100,14 @@ export const getApiTokenDefaults = (): Omit<ApiToken, ApiTokenSystemFields> => (
 })
 
 /** ApiToken-specific converter from Firestore snapshot. */
-export function apiTokenFromSnapshot (snapshot: DocumentSnapshot): ApiToken {
+export function apiTokenFromSnapshot(snapshot: DocumentSnapshot): ApiToken {
   return fromSnapshot<ApiTokenFirestore, ApiToken>(snapshot, {
     dateFields: ['lastUsedAt', 'expiresAt'],
   })
 }
 
 /** ApiToken-specific converter from serialized data. */
-export function apiTokenFromSerialized (serialized: ApiTokenSerialized): ApiToken {
+export function apiTokenFromSerialized(serialized: ApiTokenSerialized): ApiToken {
   return fromSerialized<ApiTokenSerialized, ApiToken>(serialized, {
     dateFields: ['createdAt', 'updatedAt', 'lastUsedAt', 'expiresAt'],
   })

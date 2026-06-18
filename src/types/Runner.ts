@@ -1,7 +1,7 @@
+import { fromSerialized, fromSnapshot } from '../utils/converters'
+import type { ReplaceWithString, ReplaceWithTimestamp } from '../utils/typeUtils'
 import type { CueStartMode } from './Cue'
-import type { DocumentSnapshotId, DocumentSnapshot } from './FirebaseBuiltins'
-import { fromSnapshot, fromSerialized } from '../utils/converters'
-import { ReplaceWithTimestamp, ReplaceWithString } from '../utils/typeUtils'
+import type { DocumentSnapshot, DocumentSnapshotId } from './FirebaseBuiltins'
 
 /**
  * The timesnap contains all the information to derive the current countdown status.
@@ -86,7 +86,7 @@ export const getRunnerDefaults = (): Omit<Runner, RunnerSystemFields> => {
       running: false,
       kickoff: now,
       lastStop: now,
-      deadline: now + (10 * 60000),
+      deadline: now + 10 * 60000,
     },
     nextCueId: null,
     originalCues: {},
@@ -98,7 +98,7 @@ export const getRunnerDefaults = (): Omit<Runner, RunnerSystemFields> => {
 /**
  * Runner-specific converter from Firestore snapshot
  */
-export function runnerFromSnapshot (snapshot: DocumentSnapshot): Runner {
+export function runnerFromSnapshot(snapshot: DocumentSnapshot): Runner {
   return fromSnapshot<RunnerFirestore, Runner>(snapshot, {
     // Runner has no Date fields, only string dates in nested objects
     dateFields: [],
@@ -108,7 +108,7 @@ export function runnerFromSnapshot (snapshot: DocumentSnapshot): Runner {
 /**
  * Runner-specific converter from serialized data
  */
-export function runnerFromSerialized (serialized: RunnerSerialized): Runner {
+export function runnerFromSerialized(serialized: RunnerSerialized): Runner {
   return fromSerialized<RunnerSerialized, Runner>(serialized, {
     dateFields: ['createdAt', 'updatedAt'],
   })
