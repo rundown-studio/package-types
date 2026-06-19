@@ -25,6 +25,7 @@ export enum Features {
   IMPORT = 'IMPORT', // Import CSV
   EXPORT = 'EXPORT', // Export CSV and PDFs
   GUEST_EDIT = 'GUEST_EDIT', // Guests can edit rundown and/or columns
+  API = 'API',
 }
 
 //
