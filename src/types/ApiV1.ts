@@ -119,6 +119,13 @@ export interface ApiV1Countdown {
 
 export type ApiV1CueType = 'cue' | 'heading' | 'group'
 
+/**
+ * Why a cue is skipped during the show — `null` on `ApiV1Cue` means it runs.
+ * `'self'` takes precedence when a cue's own flag AND its group's are both set,
+ * which keeps the stored own flag recoverable as `skipped_by === 'self'`.
+ */
+export type ApiV1SkippedBy = 'self' | 'group'
+
 export type ApiV1RundownStatus = 'imported' | 'draft' | 'awaiting-data' | 'approved' | 'finalized' | 'rejected'
 
 /** Public projection of a column — the `GET /columns/:id` shape, fat `column` event body. */
@@ -154,6 +161,7 @@ export interface ApiV1Cue {
   duration_ms: number
   background_color: string | null
   prevent_edits: boolean
+  skipped_by: ApiV1SkippedBy | null
   start_time: number | null
   created_at: string | null
   updated_at: string | null
